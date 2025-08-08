@@ -1,0 +1,24 @@
+{% extends 'base.html' %}
+{% block title %}My Tickets{% endblock %}
+
+{% block content %}
+<h2 class="mb-4">🎫 My Submitted Tickets</h2>
+<div class="row">
+  {% for ticket in tickets %}
+    <div class="col-md-6 mb-3">
+      <div class="card p-3">
+        <h5 class="text-primary">{{ ticket.title }}</h5>
+        <p class="text-muted">{{ ticket.description|truncatechars:100 }}</p>
+        <p>
+          <span class="badge bg-secondary">{{ ticket.category }}</span>
+          <span class="badge bg-warning text-dark">{{ ticket.urgency }}</span>
+          <span class="badge bg-success">{{ ticket.status }}</span>
+        </p>
+        <a href="{% url 'ticket_detail' ticket.id %}" class="btn btn-outline-primary btn-sm">View Details</a>
+      </div>
+    </div>
+  {% empty %}
+    <p>No tickets submitted yet.</p>
+  {% endfor %}
+</div>
+{% endblock %}
